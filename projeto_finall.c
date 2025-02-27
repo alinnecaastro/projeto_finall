@@ -22,12 +22,9 @@
 
 int pos_x = WIDTH / 2;  // Posição inicial do personagem (centro)
 int pos_y = HEIGHT - 10;  // Posição Y fixa (parte inferior da tela)
-uint8_t border_thickness = 1;  // Espessura inicial da borda
-uint8_t border_style = 0;           // Estilo da borda do display (0, 1, 2, ...)
 
 int obstaculo_x[NUM_OBSTACULOS];
 int obstaculo_y[NUM_OBSTACULOS];
-int pontuacao[NUM_OBSTACULOS];  // Pontuação do jogador
 bool game_active = true;  // Indica se o jogo está ativo
 
 bool game_started = false;  // Variável para verificar se o jogo já começou
@@ -86,7 +83,6 @@ void inicializar_obstaculos() {
     for (int i = 0; i < NUM_OBSTACULOS; i++) {
         obstaculo_x[i] = rand() % (HEIGHT - 10);
         obstaculo_y[i] = 0;
-        pontuacao[i] = 0;
     }
 }
 
@@ -99,7 +95,7 @@ void atualizar_obstaculos() {
         if (obstaculo_y[i] > WIDTH) {
             obstaculo_y[i] = 0;  // Reinicia o obstáculo no topo
             obstaculo_x[i] = rand() % (HEIGHT - 10);  // Nova posição X aleatória
-            pontuacao[i]++;  // Aumenta a pontuação
+           
         }
     }
 }
@@ -334,6 +330,7 @@ int main() {
 
             // Verifica colisão
             if (verificar_colisao()) {
+                gamer_over();
                 game_started = false;  // Encerra o jogo
                 ssd1306_fill(&ssd, false);  // Limpa a tela
                 ssd1306_send_data(&ssd);

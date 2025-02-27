@@ -40,7 +40,7 @@ add_executable(projeto_finall projeto_finall.c ssd1306.c)
 pico_set_program_name(projeto_finall "projeto_finall")
 pico_set_program_version(projeto_finall "0.1")
 
-pico_generate_pio_header(projeto_finall ${CMAKE_CURRENT_LIST_DIR}/ws2818b.pio)
+pico_generate_pio_header(projeto_finall ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio)
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(projeto_finall 1)
